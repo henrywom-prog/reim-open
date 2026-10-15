@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="REIM — Agent-native real estate return calculator. Understand net yield, IRR and risk with transparent assumptions.">
+  <title>REIM — Property returns, explained.</title>
+  <style>:root{--ink:#153036;--deep:#123c41;--accent:#de8655;--muted:#657773;--border:#d9e3dc;--paper:#fafbf6;--bg:#eff3ec}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,"Noto Sans SC",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}button,input,textarea,select{font:inherit}button{cursor:pointer}.app-shell{max-width:1560px;margin:0 auto;background:var(--paper);min-height:100vh;box-shadow:0 0 70px #0d312e0a}.topbar{display:flex;align-items:center;justify-content:space-between;padding:28px 5%;border-bottom:1px solid var(--border);gap:15px}.logo{font-size:25px;font-weight:900;letter-spacing:-.05em}.logo-slash{color:var(--accent);margin:0 9px}.logo-small{font-size:10px;letter-spacing:.18em;font-weight:700;color:var(--muted)}.topactions{display:flex;align-items:center;gap:18px}.local-pill{font-size:11px;color:#557166}.language,.github{background:none;border:0;text-decoration:none;color:var(--deep);font-size:12px;font-weight:800;letter-spacing:.08em}.language{border:1px solid var(--border);padding:8px 10px;border-radius:9px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:0;align-items:start}.form-col{padding:0 clamp(25px,5vw,90px) 70px}.intro{padding:82px 0 60px;position:relative}.overline,.step{color:#b36d49;font-size:11px;font-weight:800;letter-spacing:.18em}.overline span{color:var(--muted)}h1{font-family:Georgia,'Noto Serif SC',serif;font-size:clamp(47px,5.9vw,79px);line-height:1.08;letter-spacing:-.04em;margin:24px 0 25px}h1 em{font-style:normal;color:#3a7773}.intro p{font-size:16px;line-height:1.8;max-width:620px;color:#5a6e6a}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:27px}.chips span{font-size:9px;font-weight:750;letter-spacing:.12em;border:1px solid #b9cec5;padding:8px 10px;border-radius:20px;color:var(--deep)}.editor{border-top:1px solid var(--border);padding:30px 0 45px}.section-heading{display:flex;align-items:baseline;gap:22px;margin-bottom:26px}.section-heading h2{font-size:22px;letter-spacing:-.03em;margin:0 0 4px}.section-heading p{font-size:12px;color:var(--muted);margin:0}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field{display:flex;flex-direction:column;gap:9px;margin-bottom:17px}.field label{font-size:12px;font-weight:700;color:#475e58}.field input,.field select,.field textarea,.editor select{border:1px solid #d4ded7;background:#fff;border-radius:9px;padding:12px 14px;outline:none;width:100%;font-size:14px;color:var(--ink);transition:border .2s,box-shadow .2s;min-width:0}.field input:focus,.field textarea:focus,.editor select:focus{border-color:#53918c;box-shadow:0 0 0 3px #b5e5dc55}.field.full{margin-bottom:23px}.mode-title{display:flex;justify-content:space-between;align-items:center;margin:17px 0 16px;padding-bottom:10px;border-bottom:1px solid #e6eee8}.mode-title span:first-child{font-weight:800;font-size:14px}.mode-title span:last-child{font-size:10px;letter-spacing:.11em;color:var(--muted)}.tip{font-size:12px;color:var(--muted);margin:0 0 15px;line-height:1.6}.month-head,.month-row{display:grid;grid-template-columns:1fr 1.15fr 1.15fr;align-items:center;gap:15px}.month-head{font-size:11px;font-weight:700;color:var(--muted);padding-bottom:7px}.month-row{border-top:1px solid #e8eee8;padding:8px 0}.month-row span{font-size:13px;font-weight:650}.month-row input{border:1px solid #dbe3de;padding:10px 12px;width:100%;border-radius:7px;background:white;font-size:13px;min-width:0}details{margin-top:18px}summary{font-size:13px;font-weight:800;color:#2e6665;cursor:pointer;padding:13px 0}.more-fields{padding-top:18px}.result-panel{min-height:100vh;align-self:stretch;border-left:1px solid #e0e7e0;background:#e7eee7;padding:34px 25px}.aside-sticky{position:sticky;top:30px}.result-top{display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:.13em;font-weight:800}.result-top span{color:#5e867d}.report-state{border:1px solid #7c9f96;border-radius:20px;padding:5px 9px}.aside-heading{font-size:21px;font-weight:750;letter-spacing:-.04em;margin-top:52px}.price-result{font-size:clamp(62px,6vw,79px);font-weight:800;letter-spacing:-.08em;line-height:1.3;color:#195752;margin-top:3px}.result-caption{color:#6a827b;font-size:12px;line-height:1.7;margin:0}.divider{border-bottom:1px solid #bbccc1;margin:30px 0}.mini-stats{display:grid;grid-template-columns:1fr 1fr;gap:27px 8px}.mini-stats div{display:flex;flex-direction:column;gap:8px}.mini-stats label{font-size:11px;color:#5f766d;line-height:1.4}.mini-stats strong{font-size:18px;letter-spacing:-.03em}.scenario-note{font-size:12px;color:#5f766d;margin:35px 0 21px;line-height:1.7;padding:16px;background:#f5f7f0;border-radius:10px;border-left:3px solid var(--accent)}.primary,.secondary,.ghost{width:100%;padding:16px;border-radius:10px;font-weight:800;font-size:13px;margin-bottom:10px}.primary{background:#154d4e;border:1px solid #154d4e;color:white}.primary:hover{background:#0c3638}.secondary{background:white;border:1px solid #a7c5b7;color:var(--deep)}.ghost{background:none;border:none;color:#326c65}.privacy{font-size:10px;line-height:1.7;color:#71827c;margin-top:22px}.error{background:#fff2e8;color:#9b3e28;padding:13px;border-radius:8px;margin-bottom:15px;font-size:12px}footer{display:flex;justify-content:space-between;gap:15px;color:#698079;background:#eff3ec;border-top:1px solid var(--border);padding:30px 5%;font-size:10px;letter-spacing:.1em;font-weight:700}@media(max-width:1080px){.layout{grid-template-columns:1fr}.result-panel{min-height:0;border-left:0;padding:30px 6%}.aside-sticky{position:relative;top:0}.form-col{padding:0 6% 40px}.intro{padding:55px 0}.topbar{padding:25px 6%}.price-result{font-size:64px}.mini-stats{grid-template-columns:repeat(4,1fr)}}@media(max-width:650px){.logo-small,.local-pill{display:none}.field-grid{grid-template-columns:1fr;gap:0}.intro{padding:48px 0 35px}h1{font-size:48px}.section-heading{gap:12px}.section-heading h2{font-size:20px}.month-head,.month-row{gap:9px}.mini-stats{grid-template-columns:1fr 1fr}footer{flex-wrap:wrap;font-size:9px}.topactions{gap:10px}}
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar"><div class="logo">REIM<span class="logo-slash">/</span><span class="logo-small">REAL ESTATE INTELLIGENCE</span></div><div class="topactions"><div class="local-pill" data-i18n="private">◌ Local calculations · No account</div><button class="language" type="button" id="langButton" aria-label="Switch language">EN</button><a class="github" href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer">AGENT SKILLS ↗</a></div></header>
+  <div class="layout">
+    <main class="form-col">
+      <section class="intro"><div class="overline">INDEPENDENT FINANCIAL THINKING <span> / v0.1</span></div><h1 data-i18n="headline">房子究竟<br><em>能赚多少钱？</em></h1><p data-i18n="intro">不只看租售比。把房价、季节性入住率、隐藏成本和卖出价格放进同一个透明模型。</p><div class="chips"><span>NET YIELD</span><span>IRR</span><span>STRESS TEST</span><span>8-PAGE REPORT</span></div></section>
+      <section class="editor">
+        <div class="section-heading"><span class="step">01</span><div><h2 data-i18n="propertyTitle">物业概况</h2><p data-i18n="propertyHint">先输入你实际知道的信息；不确定的参数可以使用假设。</p></div></div>
+        <div class="field full"><label data-i18n="example">示例项目</label><select id="preset"><option value="custom">Custom / 自定义</option><option value="ansam-1">Ansam 1 · Abu Dhabi</option><option value="ajwan-c">Ajwan C · Abu Dhabi</option><option value="damac-heights">DAMAC Heights · Dubai</option><option value="sobha-waves">Sobha Waves · Dubai</option></select></div>
+        <div class="field-grid">
+          <div class="field"><label for="project" data-i18n="project">项目名称</label><input id="project" type="text" maxlength="160" placeholder="Building / project"></div>
+          <div class="field"><label for="currency" data-i18n="currency">币种</label><input id="currency" type="text" maxlength="8" value="AED" placeholder="AED / USD / CNY"></div>
+          <div class="field"><label for="city" data-i18n="city">城市</label><input id="city" type="text" maxlength="80"></div>
+          <div class="field"><label for="country" data-i18n="country">国家</label><input id="country" type="text" maxlength="80"></div>
+          <div class="field"><label for="purchasePrice" data-i18n="purchasePrice">购房总价</label><input id="purchasePrice" inputmode="decimal" type="number" min="1" step="1000"></div>
+          <div class="field"><label for="holdYears" data-i18n="holdYears">计划持有年数</label><input id="holdYears" type="number" min="1" max="40" step="1"></div>
+          <div class="field"><label for="appreciationPct" data-i18n="growth">预计房价年变化（%）</label><input id="appreciationPct" type="number" step="0.5"></div>
+          <div class="field"><label for="rentGrowthPct" data-i18n="rentGrowth">租金每年增长（%）</label><input id="rentGrowthPct" type="number" step="0.5"></div>
+        </div>
+      </section>
+      <section class="editor">
+        <div class="section-heading"><span class="step">02</span><div><h2 data-i18n="rentalTitle">出租收入</h2><p data-i18n="rentalHint">把长租和短租放在一起，找出更合理的经营方式。</p></div></div>
+        <div class="mode-title"><span data-i18n="longlet">长期租赁</span><span>ANNUAL RENT</span></div>
+        <div class="field-grid"><div class="field"><label for="longRent" data-i18n="annualRent">长租年租金</label><input id="longRent" type="number" min="0"></div><div class="field"><label for="longVacancyPct" data-i18n="longVacancy">空置准备率（%）</label><input id="longVacancyPct" type="number" min="0" max="100" step="0.5"></div></div>
+        <div class="mode-title"><span data-i18n="shortlet">短期租赁</span><span>MONTHLY ADR / OCCUPANCY</span></div>
+        <p class="tip" data-i18n="monthHint">每个月的平均成交房价和全年日历入住率。请勿把某一次旅游住宿价格当作全年均价。</p>
+        <div class="month-head"><span data-i18n="month">月份</span><span data-i18n="adr">每晚平均房价</span><span data-i18n="occupancy">入住率（%）</span></div><div id="months" class="month-grid"></div>
+      </section>
+      <section class="editor">
+        <div class="section-heading"><span class="step">03</span><div><h2 data-i18n="costsTitle">成本和比较</h2><p data-i18n="costsHint">所有数据可编辑。我们不会默认为你填入某国的税率。</p></div></div>
+        <div class="field-grid">
+          <div class="field"><label for="serviceCharge" data-i18n="service">年度物业费</label><input id="serviceCharge" type="number" min="0"></div>
+          <div class="field"><label for="maintenance" data-i18n="maintenance">年度维修预留</label><input id="maintenance" type="number" min="0"></div>
+          <div class="field"><label for="utilities" data-i18n="utilities">短租年水电网络</label><input id="utilities" type="number" min="0"></div>
+          <div class="field"><label for="shortFixedCosts" data-i18n="otherShort">短租其他年度固定费用</label><input id="shortFixedCosts" type="number" min="0"></div>
+          <div class="field"><label for="shortManagementPct" data-i18n="shortMgmt">短租平台及管理（%）</label><input id="shortManagementPct" type="number" min="0" max="100" step="0.5"></div>
+          <div class="field"><label for="longManagementPct" data-i18n="longMgmt">长租管理（%）</label><input id="longManagementPct" type="number" min="0" max="100" step="0.5"></div>
+        </div>
+        <details><summary data-i18n="advanced">高级参数 · 交易、税费、替代投资</summary>
+          <div class="field-grid more-fields">
+            <div class="field"><label for="purchaseCostsPct" data-i18n="buyFees">买入交易费（%）</label><input id="purchaseCostsPct" type="number" min="0" max="100" step="0.1"></div>
+            <div class="field"><label for="saleCostsPct" data-i18n="saleFees">卖出交易费（%）</label><input id="saleCostsPct" type="number" min="0" max="100" step="0.1"></div>
+            <div class="field"><label for="furnishing" data-i18n="furnishing">家具和一次性投入</label><input id="furnishing" type="number" min="0"></div>
+            <div class="field"><label for="discountRatePct" data-i18n="target">目标回报/折现率（%）</label><input id="discountRatePct" type="number" step="0.25"></div>
+            <div class="field"><label for="benchmarkYieldPct" data-i18n="benchmark">替代资产收益率（%）</label><input id="benchmarkYieldPct" type="number" step="0.25"></div>
+            <div class="field"><label for="longExtraCosts" data-i18n="longExtra">长租其他年费</label><input id="longExtraCosts" type="number" min="0"></div>
+            <div class="field"><label for="tourismPct" data-i18n="tourismPct">短租按收入征费（%）</label><input id="tourismPct" type="number" min="0" max="100" step="0.5"></div>
+            <div class="field"><label for="tourismPerNight" data-i18n="tourismNight">每已出租晚额外收费</label><input id="tourismPerNight" type="number" min="0"></div>
+            <div class="field"><label for="cleaningPerNight" data-i18n="cleaning">每已出租晚变动成本</label><input id="cleaningPerNight" type="number" min="0"></div>
+          </div>
+        </details>
+      </section>
+      <section class="editor">
+        <div class="section-heading"><span class="step">04</span><div><h2 data-i18n="evidence">数据依据</h2><p data-i18n="evidenceHint">给报告加上来源和日期。无法核验的数字应该明确标为估计。</p></div></div>
+        <div class="field-grid"><div class="field"><label for="sourceLabel" data-i18n="sourceName">主要数据来源描述</label><input id="sourceLabel" type="text" maxlength="300" placeholder="Registry / listing / user observation"></div><div class="field"><label for="sourceUrl" data-i18n="sourceUrl">来源网址（可选）</label><input id="sourceUrl" type="url" placeholder="https://..."></div></div>
+        <div class="field"><label for="notes" data-i18n="notes">重要说明与不确定性</label><textarea id="notes" rows="3" maxlength="1500"></textarea></div>
+      </section>
+    </main>
+    <aside class="result-panel"><div class="aside-sticky"><div class="result-top"><small>REIM <span>LIVE ANALYSIS</span></small><span class="report-state" id="reportState" data-i18n="provisional">SCENARIO</span></div><div class="aside-heading" data-i18n="yourForecast">你的投资预测</div><div class="price-result" id="irrResult">—</div><p class="result-caption" data-i18n="irrCaption">综合年化 IRR · 按较高净收入的出租模式测算</p><div class="divider"></div><div class="mini-stats"><div><label data-i18n="netYield">第一年净租金收益率</label><strong id="yieldResult">—</strong></div><div><label data-i18n="annualNet">年度净租金</label><strong id="netResult">—</strong></div><div><label data-i18n="netRentMode">租赁方式</label><strong id="modeResult">—</strong></div><div><label data-i18n="benchmarkGap">相对替代投资收益差</label><strong id="gapResult">—</strong></div></div><div class="scenario-note" id="scenarioNote">—</div><div id="error" role="alert" class="error" hidden></div><button class="primary" id="downloadReport" type="button" data-i18n="makeReport">生成 8 页 HTML 报告 ↗</button><button class="secondary" id="downloadJson" type="button" data-i18n="jsonExport">导出 JSON 交给智能体</button><button class="ghost" id="uploadButton" type="button" data-i18n="import">导入 JSON / Agent 预填</button><input type="file" id="jsonFile" accept="application/json,.json" hidden><p class="privacy" data-i18n="privacyHint">完全在浏览器本地计算，不发送输入数据到服务器。示例是模型假设，不代表真实交易。</p></div></aside>
+  </div><footer><span>REIM / OPEN METHODOLOGY</span><span data-i18n="footer">Explainable returns. No black-box projections.</span><span>MIT LICENSE · v0.1</span></footer>
+</div>
+<script>const embeddedPresets={"ansam-1":{"project":"Ansam 1 · Yas Island","city":"Abu Dhabi","country":"UAE","currency":"AED","language":"zh","purchasePrice":1950000,"purchaseCostsPct":4.5,"saleCostsPct":2,"furnishing":25000,"holdYears":10,"appreciationPct":2,"rentGrowthPct":1,"discountRatePct":6,"benchmarkYieldPct":5,"longRent":107500,"longVacancyPct":5,"longManagementPct":5,"longExtraCosts":1500,"serviceCharge":14000,"maintenance":4000,"utilities":9000,"shortFixedCosts":0,"shortManagementPct":20,"tourismPct":6,"tourismPerNight":0,"cleaningPerNight":25,"monthly":[{"adr":620,"occupancy":70},{"adr":620,"occupancy":70},{"adr":620,"occupancy":70},{"adr":520,"occupancy":60},{"adr":360,"occupancy":50},{"adr":360,"occupancy":50},{"adr":360,"occupancy":50},{"adr":360,"occupancy":50},{"adr":360,"occupancy":50},{"adr":520,"occupancy":60},{"adr":620,"occupancy":70},{"adr":620,"occupancy":70}],"sources":[{"label":"Illustrative purchase and rent benchmarks — replace with verified listings/registry data","url":"","quality":"estimate","date":"2026-10-14"}],"notes":"Illustrative model, not property appraisal. Seasonal occupancy and ADR are assumptions."},"ajwan-c":{"project":"Ajwan Towers C · Museum view","city":"Abu Dhabi","country":"UAE","currency":"AED","language":"zh","purchasePrice":2850000,"purchaseCostsPct":4.5,"saleCostsPct":2,"furnishing":40000,"holdYears":10,"appreciationPct":2,"rentGrowthPct":1,"discountRatePct":6,"benchmarkYieldPct":5,"longRent":170000,"longVacancyPct":5,"longManagementPct":5,"longExtraCosts":2000,"serviceCharge":25000,"maintenance":6000,"utilities":15000,"shortFixedCosts":0,"shortManagementPct":20,"tourismPct":6,"tourismPerNight":0,"cleaningPerNight":35,"monthly":[{"adr":1200,"occupancy":70},{"adr":1200,"occupancy":70},{"adr":1200,"occupancy":70},{"adr":950,"occupancy":55},{"adr":620,"occupancy":35},{"adr":620,"occupancy":35},{"adr":620,"occupancy":35},{"adr":620,"occupancy":35},{"adr":620,"occupancy":35},{"adr":950,"occupancy":55},{"adr":1200,"occupancy":70},{"adr":1200,"occupancy":70}],"sources":[{"label":"Illustrative model based on public asking price and traveler observations","url":"","quality":"estimate","date":"2026-10-14"}],"notes":"Illustrative model only. Beach access does not ensure occupancy or pricing premium."},"damac-heights":{"project":"DAMAC Heights · 2BR","city":"Dubai","country":"UAE","currency":"AED","language":"zh","purchasePrice":2900000,"purchaseCostsPct":6.1,"saleCostsPct":2.1,"furnishing":60000,"holdYears":10,"appreciationPct":2,"rentGrowthPct":1,"discountRatePct":6,"benchmarkYieldPct":5,"longRent":175000,"longVacancyPct":5,"longManagementPct":5,"longExtraCosts":2000,"serviceCharge":25000,"maintenance":8500,"utilities":18000,"shortFixedCosts":0,"shortManagementPct":20,"tourismPct":0,"tourismPerNight":30,"cleaningPerNight":35,"monthly":[{"adr":1000,"occupancy":80},{"adr":1000,"occupancy":80},{"adr":1000,"occupancy":80},{"adr":823,"occupancy":70},{"adr":625,"occupancy":60},{"adr":625,"occupancy":60},{"adr":625,"occupancy":60},{"adr":625,"occupancy":60},{"adr":625,"occupancy":60},{"adr":823,"occupancy":70},{"adr":1000,"occupancy":80},{"adr":1000,"occupancy":80}],"sources":[{"label":"Traveler-observed nightly price Oct 2025 (CNY 1,500); other inputs illustrative","url":"","quality":"mixed","date":"2025-10"}],"notes":"2025 Oct ADR observed once; do not extrapolate to the full year."},"sobha-waves":{"project":"Sobha Hartland Waves · 2BR","city":"Dubai","country":"UAE","currency":"AED","language":"zh","purchasePrice":2150000,"purchaseCostsPct":6.1,"saleCostsPct":2.1,"furnishing":45000,"holdYears":10,"appreciationPct":2,"rentGrowthPct":1,"discountRatePct":6,"benchmarkYieldPct":5,"longRent":125000,"longVacancyPct":5,"longManagementPct":5,"longExtraCosts":1500,"serviceCharge":18000,"maintenance":6500,"utilities":15000,"shortFixedCosts":0,"shortManagementPct":20,"tourismPct":0,"tourismPerNight":20,"cleaningPerNight":30,"monthly":[{"adr":820,"occupancy":75},{"adr":820,"occupancy":75},{"adr":820,"occupancy":75},{"adr":640,"occupancy":60},{"adr":470,"occupancy":50},{"adr":470,"occupancy":50},{"adr":470,"occupancy":50},{"adr":470,"occupancy":50},{"adr":470,"occupancy":50},{"adr":640,"occupancy":60},{"adr":820,"occupancy":75},{"adr":820,"occupancy":75}],"sources":[{"label":"Traveler-observed nightly price Oct 2025 (CNY 1,166); other inputs illustrative","url":"","quality":"mixed","date":"2025-10"}],"notes":"Unavailability of a prior rental listing does not prove a sale."}};
+/* REIM deterministic real-estate engine — dependency-free, runs in browsers and Node. */
+const VERSION = '0.1.0';
+const DAYS = [31,28,31,30,31,30,31,31,30,31,30,31];
+const num = (value, fallback = 0) => { const n=Number(value); return Number.isFinite(n) ? n : fallback; };
+const clamp = (value, min, max) => Math.max(min, Math.min(max, num(value)));
+const sum = items => items.reduce((a,b)=>a+b,0);
+function validate(p) {
+  const errors=[];
+  if (!p || typeof p !== 'object') return ['Input must be an object'];
+  if (!Number.isFinite(Number(p.purchasePrice)) || Number(p.purchasePrice)<=0) errors.push('purchasePrice must be positive');
+  if (!(Number.isInteger(Number(p.holdYears)) && Number(p.holdYears)>=1 && Number(p.holdYears)<=40)) errors.push('holdYears must be integer from 1 to 40');
+  for (const key of ['purchaseCostsPct','saleCostsPct','appreciationPct','rentGrowthPct','discountRatePct','benchmarkYieldPct','serviceCharge','maintenance','utilities','furnishing','longRent','longVacancyPct','longManagementPct','shortManagementPct','tourismPct','tourismPerNight','cleaningPerNight','shortFixedCosts']) {
+    if (p[key]!==undefined && (!Number.isFinite(Number(p[key])) || (['serviceCharge','maintenance','utilities','furnishing','longRent','tourismPerNight','cleaningPerNight','shortFixedCosts'].includes(key) && Number(p[key])<0))) errors.push(`${key} must be valid`);
+  }
+  for (const key of ['purchaseCostsPct','saleCostsPct','longVacancyPct','longManagementPct','shortManagementPct','tourismPct']) {
+    if(p[key]!==undefined && (Number(p[key])<0||Number(p[key])>100))errors.push(`${key} must be between 0 and 100`);
+  }
+  if (!Array.isArray(p.monthly) || p.monthly.length!==12) errors.push('monthly must have exactly 12 entries');
+  for(const [i,m] of (Array.isArray(p.monthly)?p.monthly:[]).entries()){
+    if(!Number.isFinite(Number(m.adr)) || Number(m.adr)<0)errors.push(`monthly[${i}].adr must be >= 0`);
+    if(!Number.isFinite(Number(m.occupancy)) || Number(m.occupancy)<0||Number(m.occupancy)>100)errors.push(`monthly[${i}].occupancy must be 0..100`);
+  }
+  if (p.appreciationPct!==undefined && Number(p.appreciationPct)<=-100) errors.push('appreciationPct must exceed -100');
+  if (p.rentGrowthPct!==undefined && Number(p.rentGrowthPct)<=-100) errors.push('rentGrowthPct must exceed -100');
+  if (p.discountRatePct!==undefined && Number(p.discountRatePct)<=-100) errors.push('discountRatePct must exceed -100');
+  return errors;
+}
+function npv(cashflows, annualRatePct) {
+  const r=num(annualRatePct)/100;
+  if (r<=-1) return null;
+  return sum(cashflows.map((f,t)=>f/Math.pow(1+r,t)));
+}
+function irr(cashflows) {
+  const hasPos=cashflows.some(x=>x>0), hasNeg=cashflows.some(x=>x<0);
+  if(!hasPos||!hasNeg)return null;
+  const at = r => sum(cashflows.map((f,t)=>f/Math.pow(1+r,t)));
+  let low=-0.9999,high=1;
+  let lo=at(low), hi=at(high);
+  while(hi>0 && high<1e6){high=high*2+1;hi=at(high);}
+  if(!Number.isFinite(lo)||!Number.isFinite(hi)||lo*hi>0)return null;
+  for(let i=0;i<160;i++){const m=(low+high)/2;const v=at(m);if(Math.abs(v)<1e-12)return m*100; if((v>0)===(lo>0)){low=m;lo=v;}else{high=m;hi=v;}}
+  return (low+high)/2*100;
+}
+const pct = x => num(x)/100;
+function annualRental(p, mode='short', year=1) {
+  const growth=Math.pow(1+pct(p.rentGrowthPct),year-1);
+  const fees=num(p.serviceCharge)+num(p.maintenance);
+  if(mode==='long') {
+    const potential=num(p.longRent)*growth;
+    const effective=potential*(1-pct(p.longVacancyPct));
+    const manager=effective*pct(p.longManagementPct);
+    const extras=num(p.longExtraCosts);
+    return { gross:effective, potential, expense:fees+manager+extras, net:effective-fees-manager-extras, bookedNights:null, adr:null, items:{serviceCharge:num(p.serviceCharge),maintenance:num(p.maintenance),management:manager,other:extras} };
+  }
+  const m = p.monthly || DAYS.map(()=>({adr:0,occupancy:0}));
+  const bookedNights=sum(m.map((x,i)=>DAYS[i]*pct(x.occupancy)));
+  const gross=sum(m.map((x,i)=>DAYS[i]*pct(x.occupancy)*num(x.adr)))*growth;
+  const service=num(p.serviceCharge), fixed=num(p.shortFixedCosts), utility=num(p.utilities);
+  const manager=gross*pct(p.shortManagementPct), tourism=gross*pct(p.tourismPct)+bookedNights*num(p.tourismPerNight);
+  const cleaning=bookedNights*num(p.cleaningPerNight);
+  const expense=service+num(p.maintenance)+fixed+utility+manager+tourism+cleaning;
+  return {gross,potential:sum(m.map((x,i)=>DAYS[i]*num(x.adr)))*growth, expense,net:gross-expense,bookedNights,adr:bookedNights>0?gross/bookedNights:0,items:{serviceCharge:service,maintenance:num(p.maintenance),fixed,utilities:utility,management:manager,tourism,cleaning}};
+}
+function evaluate(raw,mode='short') {
+  const errors=validate(raw); if(errors.length) throw new Error(errors.join('; '));
+  const p={...raw};const years=num(p.holdYears),price=num(p.purchasePrice);
+  const buyFees=price*pct(p.purchaseCostsPct),upfront=price+buyFees+num(p.furnishing);
+  const cashflows=[-upfront], annual=[];
+  for(let year=1;year<=years;year++){
+    const rental=annualRental(p,mode,year), sale=year===years?price*Math.pow(1+pct(p.appreciationPct),years):0;
+    const saleFees=sale*pct(p.saleCostsPct);const final=rental.net+sale-saleFees;
+    cashflows.push(final);
+    annual.push({year,...rental,sale,saleFees,final});
+  }
+  const first=annual[0], terminalPrice=num(p.resaleAnchorPrice,price)*Math.pow(1+pct(p.appreciationPct),years),totalRent=sum(annual.map(x=>x.net));
+  const profit=sum(cashflows);
+  return {mode,cashflows,annual,inputs:p,price,upfront,buyFees,terminalPrice,netSale:terminalPrice*(1-pct(p.saleCostsPct)),totalNetRent:totalRent,netProfit:profit,roiPct:profit/upfront*100,irrPct:irr(cashflows),npv:npv(cashflows,p.discountRatePct),first,netYieldPct:first.net/price*100,grossYieldPct:first.gross/price*100,capitalCagrPct:num(p.appreciationPct),benchmarkGapPct:(irr(cashflows)??0)-num(p.benchmarkYieldPct)};
+}
+function scenario(base,caseName='base') {
+  const p=structuredClone(base);
+  if(caseName==='cautious'){
+    p.appreciationPct=num(p.appreciationPct)-2;
+    p.rentGrowthPct=num(p.rentGrowthPct)-1;
+    p.longRent=num(p.longRent)*0.9;
+    p.monthly=p.monthly.map(x=>({adr:num(x.adr)*0.9,occupancy:clamp(num(x.occupancy)-10,0,100)}));
+  } else if(caseName==='optimistic'){
+    p.appreciationPct=num(p.appreciationPct)+2;
+    p.rentGrowthPct=num(p.rentGrowthPct)+1;
+    p.longRent=num(p.longRent)*1.1;
+    p.monthly=p.monthly.map(x=>({adr:num(x.adr)*1.1,occupancy:clamp(num(x.occupancy)+8,0,100)}));
+  }
+  return p;
+}
+function compare(raw) {
+  const base=structuredClone(raw);
+  const results={};
+  for(const type of ['cautious','base','optimistic']){
+    const params=scenario(base,type);
+    results[type]={short:evaluate(params,'short'),long:evaluate(params,'long')};
+  }
+  return results;
+}
+function annualOccupancy(p){return sum((p.monthly||[]).map((m,i)=>DAYS[i]*pct(m.occupancy)))/365*100;}
+function compareBreakEven(p){
+  const long=annualRental(p,'long').net;
+  const baseline=annualRental(p,'short');
+  const fixed=baseline.items.serviceCharge+baseline.items.maintenance+baseline.items.fixed+baseline.items.utilities;
+  const variable=baseline.gross-baseline.items.management-baseline.items.tourism-baseline.items.cleaning;
+  return variable<=0?null:annualOccupancy(p)*(long+fixed)/variable;
+}
+function maxPurchasePriceForTarget(base, targetIrrPct, mode='long'){
+  let low=1,high=num(base.purchasePrice)*10;
+  const target=num(targetIrrPct);
+  const calc=x=>evaluate({...base,purchasePrice:x,resaleAnchorPrice:num(base.resaleAnchorPrice,base.purchasePrice)},mode).irrPct;
+  if(calc(low)===null || calc(high)===null || calc(low)<target || calc(high)>target)return null;
+  for(let i=0;i<90;i++){const mid=(low+high)/2; if(calc(mid)>target)low=mid;else high=mid;}
+  return (low+high)/2;
+}
+
+
+const esc=s=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+const safeUrl=u=>/^https:\/\/[^\s<>]+$/.test(String(u||''))?u:'';
+const finite = n => Number.isFinite(n);
+function buildReport(inputs, lang=inputs.language==='en'?'en':'zh'){
+ const zh=lang!=='en', all=compare(inputs),base=all.base, slow=all.cautious, fast=all.optimistic,
+  short=base.short,long=base.long, preferred=short.first.net>long.first.net?short:long,
+  key=preferred.mode, v=preferred, currency=esc(inputs.currency||'AED'), locale=zh?'zh-CN':'en-US';
+ const money=n=>finite(n)?`${currency} ${Math.round(n).toLocaleString(locale)}`:'—';
+ const percent=n=>finite(n)?`${n.toFixed(2)}%`:'—';
+ const tiny=n=>finite(n)?n.toFixed(1):'—';
+ const t=(a,b)=>zh?a:b;
+ const chart=(a,b,unit='')=>{
+  const d=a.map((x,i)=>[i,x]), w=660,h=218, pad=29;
+  const min=Math.min(0,...a,...b),max=Math.max(...a,...b),span=max-min||1;
+  const line=(vals)=>vals.map((y,i)=>`${i===0?'M':'L'} ${(pad+i*(w-pad*2)/(vals.length-1)).toFixed(1)} ${(h-pad-(y-min)/span*(h-pad*2)).toFixed(1)}`).join(' ');
+  return `<svg class="trend" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(t('资产价值与累计租金','Asset value and cumulative rent'))}"><line x1="29" y1="190" x2="635" y2="190" stroke="#abb4bf" opacity=".5"/><path d="${line(a)}" fill="none" stroke="#28666e" stroke-width="3.5" stroke-linecap="round"/><path d="${line(b)}" fill="none" stroke="#da9360" stroke-width="3.5" stroke-linecap="round"/></svg><div class="legend"><span><i style="background:#28666e"></i>${t('出售时资产价值','Asset value')}</span><span><i style="background:#da9360"></i>${t('累计净租金','Accumulated net rent')}</span></div>`;
+ };
+ const dataRow=(label,value,sub='')=>`<div class="data-row"><span>${esc(label)}</span><strong>${value}</strong>${sub?`<small>${esc(sub)}</small>`:''}</div>`;
+ const page=(tag,title,lead,body)=>`<section class="page"><div class="eyebrow">${esc(tag)}</div><h2>${esc(title)}</h2><p class="lede">${esc(lead)}</p>${body}</section>`;
+ const kpi=(label,value,detail)=>`<div class="kpi"><small>${esc(label)}</small><strong>${value}</strong><span>${esc(detail)}</span></div>`;
+ const basePrice=Number(inputs.purchasePrice), growth=Number(inputs.appreciationPct||0);
+ const breakEven=compareBreakEven(inputs),capPrice=maxPurchasePriceForTarget(inputs,Number(inputs.discountRatePct||6),key);
+ const sourceRows=(inputs.sources||[]).map(s=>{const u=safeUrl(s.url);return `<div class="source"><strong>${esc(s.label||'Source')}</strong><small>${esc(s.quality||'unverified')} · ${esc(s.date||'date unspecified')}</small>${u?`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>`:''}</div>`;}).join('');
+ const yearly=Array.from({length:preferred.annual.length},(_,i)=>preferred.annual[i]);
+ const priceSeries=[basePrice,...yearly.map(x=>iVal(basePrice,growth,x.year))];
+ const rentSeries=[0,...yearly.map((_,i)=>yearly.slice(0,i+1).reduce((s,x)=>s+x.net,0))];
+ function iVal(val,g,y){return val*Math.pow(1+g/100,y);}
+ const sections=[
+  page('01 / EXECUTIVE BRIEF',t('这套房，账算得过来吗？','Does this property make financial sense?'),
+    t(`以${inputs.holdYears}年持有期、房价每年变化${growth}%为假设。以下是预测，不是未来保证。`,`Assuming a ${inputs.holdYears}-year hold and ${growth}% annual price change. These are forecasts, not guarantees.`),
+    `<div class="hero-numbers">${kpi(t('综合年化 IRR','Annualized IRR'),percent(v.irrPct),t('含出售与费用','Including eventual sale and costs'))}${kpi(t('第一年净租金收益率','Year-1 net yield'),percent(v.netYieldPct),t('扣除模型经营费用','After modeled operating costs'))}${kpi(t('净现值 NPV','Net present value'),money(v.npv),t('按输入折现率计算','At your chosen discount rate'))}</div><div class="insight"><b>${t('一句大白话','In plain English')}</b><p>${esc(zh?`假设现在花 ${money(v.upfront)} 买入并完成初期布置，${inputs.holdYears} 年后按预测价格出售，期间收租，模型年化回报约 ${percent(v.irrPct)}。如果房价不涨或房子空置更久，回报会下降。`:`You invest ${money(v.upfront)} up front, collect rent and sell after ${inputs.holdYears} years. Modeled annualized return is ${percent(v.irrPct)}. Lower resale prices or more vacancy reduce it.`)}</p></div>`),
+  page('02 / THE ASSET',t('先看你买的是什么','Understand the asset first'),
+    t('挂牌价、用户报价和政府登记成交价不是同一种证据。','Asking prices, user observations and registered sales are different levels of evidence.'),
+    `<div class="data-card">${dataRow(t('项目','Project'),esc(inputs.project||'—'))}${dataRow(t('城市 / 国家','City / country'),esc([inputs.city,inputs.country].filter(Boolean).join(' / ')))}${dataRow(t('买入价','Purchase price'),money(basePrice))}${dataRow(t('购置费与初始家具','Buying costs and furnishing'),money(v.buyFees+Number(inputs.furnishing||0)))}${dataRow(t('投入总额','Initial investment'),money(v.upfront))}${dataRow(t('持有年限','Holding period'),`${esc(inputs.holdYears)} ${t('年','years')}`)}</div><p class="muted">${t('注意：本报告使用的是用户输入或示例参数。没有登记数据就不能声称是真实成交。','Note: this report uses supplied or sample inputs. Do not claim verified sale prices without registry evidence.')}</p>`),
+  page('03 / RENTAL REALITY',t('一年真正租出去多少天？','How many nights can actually be rented?'),
+    t('短租日价高，不代表净收入必然高。我们同时比较长租与短租。','High nightly rates do not guarantee higher net income. Compare long and short lets.'),
+    `<div class="cols"><div class="stat-card"><label>${t('短租｜第一年','Short-let · year 1')}</label><h3>${money(short.first.net)}</h3><p>${t('全年实际出租天数（模型）','Modeled booked nights')}: ${tiny(short.first.bookedNights)}<br>${t('全年平均出租房价','Achieved ADR')}: ${money(short.first.adr)}<br>${t('入住率（365天口径）','Occupancy / 365 days')}: ${percent(annualOccupancy(inputs))}</p></div><div class="stat-card"><label>${t('长租｜第一年','Long-let · year 1')}</label><h3>${money(long.first.net)}</h3><p>${t('租约年收入，考虑空置后','Annual rent after vacancy')}: ${money(long.first.gross)}<br>${t('运营费用','Operating costs')}: ${money(long.first.expense)}</p></div></div><div class="insight"><b>${t('测算选择','Modeled choice')}</b><p>${esc(zh?`当前输入下，${preferred.mode==='short'?'短租':'长租'}的第一年净收入更高。短租需要约 ${percent(breakEven)} 的入住率，才能追平长租（保持每月房价结构不变）；超过100%表示现有价格下无法追平。`:`Under these inputs, ${preferred.mode==='short'?'short lets':'long lets'} produce more first-year net income. Short lets need around ${percent(breakEven)} occupancy to match long lets at current monthly pricing; over 100% implies infeasible.`)}</p></div>`),
+  page('04 / COST BREAKDOWN',t('哪些费用悄悄吃掉回报？','Where does the rental money go?'),
+    t('不只是物业费：空置、管理、清洁、网络和维修，都应计入。','Not just service charges: vacancy, management, cleaning, utilities and maintenance matter.'),
+    `<div class="data-card">${dataRow(t('首年毛收入（选定经营方式）','Year-1 rental receipts'),money(v.first.gross))}${dataRow(t('首年经营费用','Year-1 operating costs'),money(v.first.expense))}${dataRow(t('首年经营净现金流','Year-1 net rental cash flow'),money(v.first.net))}${Object.entries(v.first.items).map(([k,n])=>dataRow(k,money(n))).join('')}</div><p class="muted">${t('未提供的当地税费、资本利得税、贷款利息及保险，应由用户补充。本版不自动推定各国税法。','Country-specific taxes, capital gains, borrowing and insurance must be supplied where applicable. This version does not infer local tax law.')}</p>`),
+  page('05 / THE LONG GAME',t('真正的收益，要看持有全过程','Returns depend on the entire holding period'),
+    t('我们把每年的净租金、期末出售收入和一次性交易成本全部放进现金流。','Annual net rents, sale proceeds and transaction costs all enter the same cash-flow model.'),
+    `${chart(priceSeries,rentSeries)}<div class="data-card">${dataRow(t('期末估计市值','Expected final market value'),money(v.terminalPrice))}${dataRow(t('卖出净得（扣卖出成本）','Net sale proceeds'),money(v.netSale))}${dataRow(t('持有期累计净租金','Total net rents'),money(v.totalNetRent))}${dataRow(t('总净利润','Net cash profit'),money(v.netProfit))}${dataRow(t('综合年化IRR','Annualized IRR'),percent(v.irrPct))}</div>`),
+  page('06 / STRESS TEST',t('如果没有想象中顺利呢？','What if things do not go to plan?'),
+    t('谨慎情景降低房价增长和租金表现；乐观情景则反过来。','Cautious and optimistic scenarios vary price appreciation and rental performance.'),
+    `<div class="scenario-grid">${[['cautious',t('谨慎','Cautious')],['base',t('基础','Base')],['optimistic',t('乐观','Optimistic')]].map(([name,label])=>{const y=all[name][key];return `<div class="scenario"><small>${label}</small><strong>${percent(y.irrPct)}</strong><span>${t('第一年净租金','Year-1 net rent')} ${money(y.first.net)}</span></div>`;}).join('')}</div><div class="insight"><b>${t('最重要的提醒','Key caveat')}</b><p>${t('三个情景不是概率分布，也不能反映全部极端事件。卖房时的流动性、法规调整、房屋大修等风险需要另行评估。','These scenarios are not probabilities and do not model every tail risk. Liquidity, legal changes and major repairs require separate scrutiny.')}</p></div>`),
+  page('07 / ALTERNATIVES',t('同样的钱，还有别的选择','What else could your capital earn?'),
+    t('与同币种、相近期限的低风险资产比较，观察房地产是否提供额外回报。','Compare similar-currency and maturity alternatives to see whether real estate provides a premium.'),
+    `<div class="hero-numbers">${kpi(t('本房产年化IRR','Property IRR'),percent(v.irrPct),t('模型预测','Modeled'))}${kpi(t('输入的替代收益率','Entered benchmark yield'),percent(Number(inputs.benchmarkYieldPct||0)),t('仅为用户假设','User input, not live market data'))}${kpi(t('收益差','Return spread'),percent(v.benchmarkGapPct),t('不是风险调整后收益','Not risk-adjusted'))}</div><div class="data-card">${dataRow(t('达到目标IRR的反推最高购价','Maximum entry price at target IRR'),money(capPrice),t('未来售价按独立市场估值锚定，不随出价变化','Resale remains anchored to independent market valuation'))}${dataRow(t('目标IRR / 折现率','Target IRR / discount rate'),percent(Number(inputs.discountRatePct||0)))}</div><p class="muted">${t('不同资产的税、信用、期限和流动性风险不同。这里只比较名义收益率，不构成投资建议。','Taxes, credit, duration and liquidity differ by asset. This compares nominal yields only, not financial advice.')}</p>`),
+  page('08 / EVIDENCE & METHODS',t('数据从哪里来？哪些只是猜测？','Where does the evidence come from?'),
+    t('一份值得信赖的报告，应该明确区分用户输入、真实登记、第三方报价和推算假设。','A trustworthy report separates user observations, official records, third-party asking prices and estimates.'),
+    `<div class="sources">${sourceRows||`<p>${t('暂无来源链接；输入数据均视为未核验。','No sources supplied. Treat inputs as unverified.')}</p>`}</div><div class="insight"><b>${t('方法与边界','Method and limitations')}</b><p>${t('年度IRR按照年末收支计算。第一年收租开始于买入后，期末出售；租金年增长与房价年增长分别计算。不包括融资税务，除非费用已由用户输入。','IRR uses end-of-year cash flows: rental income begins after purchase, with sale in the final year. Rental growth and price growth are modeled separately. Financing and taxes are excluded unless entered as costs.')}</p></div><p class="muted">${esc(inputs.notes||'')}<br>${t('本报告仅用于研究与教育，不构成个性化财务、税务或法律建议。','For educational use; not personalized financial, legal or tax advice.')}</p>`)
+ ];
+ const styles=`:root{--ink:#172932;--muted:#687a7c;--line:#dce5e0;--cream:#f4f4ee;--paper:#fffefa;--teal:#28666e;--amber:#d39356}*{box-sizing:border-box}body{margin:0;background:#e6eae5;color:var(--ink);font-family:Inter,'Noto Sans SC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;line-height:1.57}.report-shell{width:min(1000px,calc(100% - 36px));margin:35px auto 110px}.brand{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:16px;font-weight:800;letter-spacing:.14em}.brand span{color:var(--teal)}.meta{text-align:right;font-size:12px;letter-spacing:0;color:var(--muted)}.paper{background:var(--paper);border:1px solid var(--line);border-radius:22px;min-height:700px;padding:clamp(26px,6vw,72px);box-shadow:0 20px 60px #253f3830}.page{display:none;animation:in .25s ease;min-height:550px}.page.active{display:block}@keyframes in{from{opacity:.5;transform:translateY(5px)}to{opacity:1;transform:none}}.eyebrow{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--teal);margin:5px 0 21px}h1{font-size:23px;margin:0;letter-spacing:-.05em}h2{font-family:Georgia,'Noto Serif SC',serif;font-size:clamp(29px,4vw,45px);letter-spacing:-.035em;line-height:1.22;margin:0 0 20px;max-width:780px}p.lede{font-size:17px;color:#526768;max-width:720px;margin-bottom:35px}.hero-numbers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.kpi,.stat-card,.scenario{background:#f2f6f2;border:1px solid #e1e9e4;border-radius:16px;padding:19px}.kpi small,.kpi span,.stat-card label,.scenario small,.scenario span{display:block;color:var(--muted);font-size:12px}.kpi strong{font-size:clamp(19px,2.6vw,30px);display:block;letter-spacing:-.05em;color:var(--teal);margin:8px 0}.insight{border-left:4px solid var(--amber);padding:19px 23px;background:#fbf6eb;border-radius:0 12px 12px 0;margin-top:28px}.insight p{margin:8px 0 0}.data-card{border-top:1px solid var(--line);margin-top:20px}.data-row{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding:13px 2px;gap:15px}.data-row span{color:var(--muted);font-size:14px}.data-row strong{text-align:right;font-size:15px}.data-row small{font-size:12px;color:var(--muted)}.cols,.scenario-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.stat-card h3{font-size:30px;margin:6px 0;color:var(--teal)}.stat-card p{color:var(--muted);font-size:13px}.scenario-grid{grid-template-columns:repeat(3,1fr)}.scenario strong{font-size:30px;display:block;margin:10px 0;color:var(--teal)}.trend{width:100%;max-height:245px}.legend{display:flex;gap:25px;justify-content:center;font-size:12px;color:var(--muted)}.legend i{width:10px;height:10px;display:inline-block;border-radius:50%;margin-right:8px}.muted{font-size:12px;color:var(--muted);margin-top:24px}.sources .source{display:grid;gap:3px;border-bottom:1px solid var(--line);padding:13px 0}.sources small{color:var(--muted)}a{color:var(--teal);overflow-wrap:anywhere;font-size:12px}.toolbar{position:fixed;bottom:0;left:0;width:100%;background:#fffef9ea;backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:13px max(20px,calc((100vw - 960px)/2));display:flex;justify-content:space-between;align-items:center;gap:10px}.toolbar button{border:1px solid #bad2cf;background:white;color:var(--teal);padding:12px 17px;border-radius:10px;font-weight:700;cursor:pointer}.toolbar button:disabled{opacity:.3}.progress{flex:1;text-align:center;font-size:13px;color:var(--muted)}@media(max-width:720px){.paper{min-height:620px}.hero-numbers,.scenario-grid{grid-template-columns:1fr}.cols{grid-template-columns:1fr}.report-shell{width:calc(100% - 18px);margin:12px auto 90px}.paper{padding:25px 19px}.kpi strong{font-size:25px}.meta{max-width:120px}}@media print{body{background:white}.report-shell{width:100%;margin:0}.brand{margin:0 24px}.paper{padding:0;border:none;box-shadow:none}.page,.page.active{display:block!important;break-after:page;min-height:0;padding:35px 48px}.toolbar{display:none}h2{font-size:32px}.hero-numbers{grid-template-columns:repeat(3,1fr)}.scenario-grid{grid-template-columns:repeat(3,1fr)}}`;
+ return `<!doctype html><html lang="${zh?'zh-CN':'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>REIM | ${esc(inputs.project||'Property analysis')}</title><style>${styles}</style></head><body><main class="report-shell"><header class="brand"><h1>REIM <span>／ INVESTMENT INTELLIGENCE</span></h1><div class="meta">${esc(inputs.project||'Property')}<br>${new Date().toISOString().slice(0,10)} · ${t('情景报告','Scenario report')}</div></header><div class="paper">${sections.join('')}</div></main><nav class="toolbar"><button id="prev" type="button">← ${t('上一页','Previous')}</button><div class="progress" id="progress" aria-live="polite"></div><button type="button" onclick="window.print()">${t('打印 / PDF','Print / PDF')}</button><button id="next" type="button">${t('下一页','Next')} →</button></nav><script>(function(){const pages=[...document.querySelectorAll('.page')];let index=0;const show=(i)=>{index=Math.max(0,Math.min(pages.length-1,i));pages.forEach((p,k)=>p.classList.toggle('active',k===index));document.getElementById('prev').disabled=index===0;document.getElementById('next').disabled=index===pages.length-1;document.getElementById('progress').textContent=(index+1)+' / '+pages.length;window.scrollTo(0,0)};document.getElementById('prev').addEventListener('click',()=>show(index-1));document.getElementById('next').addEventListener('click',()=>show(index+1));document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')show(index+1);if(e.key==='ArrowLeft')show(index-1)});show(0)})();<\/script></body></html>`;
+}
+
+
+
+const $=id=>document.getElementById(id);
+const fields=['project','city','country','currency','purchasePrice','holdYears','appreciationPct','rentGrowthPct','longRent','longVacancyPct','longManagementPct','longExtraCosts','serviceCharge','maintenance','utilities','shortFixedCosts','shortManagementPct','purchaseCostsPct','saleCostsPct','furnishing','discountRatePct','benchmarkYieldPct','tourismPct','tourismPerNight','cleaningPerNight','notes'];
+const numeric=new Set(fields.filter(x=>!['project','city','country','currency','notes'].includes(x)));
+const monthsZh=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+const monthsEn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const dict={
+  private:['◌ 本地计算 · 无需注册','◌ Local calculations · No account'],
+  headline:['房子究竟<br><em>能赚多少钱？</em>','What does your<br><em>property really earn?</em>'],
+  intro:['不只看租售比。把房价、季节性入住率、隐藏成本和卖出价格放进同一个透明模型。','Go beyond headline rental yields. Model seasonal demand, hidden costs and the eventual exit in one transparent analysis.'],
+  propertyTitle:['物业概况','The property'],propertyHint:['先输入你实际知道的信息；不确定的参数可以使用假设。','Start with facts you know; label the rest as assumptions.'],example:['示例项目','Example project'],project:['项目名称','Project name'],currency:['币种','Currency'],city:['城市','City'],country:['国家','Country'],purchasePrice:['购房总价','Purchase price'],holdYears:['计划持有年数','Holding period (years)'],growth:['预计房价年变化（%）','Annual price appreciation (%)'],rentGrowth:['租金每年增长（%）','Annual rental growth (%)'],
+  rentalTitle:['出租收入','Rental income'],rentalHint:['把长租和短租放在一起，找出更合理的经营方式。','Compare the operating economics of long and short lets.'],longlet:['长期租赁','Long-term lease'],shortlet:['短期租赁','Short-term rental'],annualRent:['长租年租金','Annual long-term rent'],longVacancy:['空置准备率（%）','Long-term vacancy allowance (%)'],monthHint:['每个月的平均成交房价和全年日历入住率。请勿把某一次旅游住宿价格当作全年均价。','Enter monthly achieved nightly rates and calendar occupancy. One holiday quote is not a year-round ADR.'],month:['月份','Month'],adr:['每晚平均房价','Average nightly rate'],occupancy:['入住率（%）','Occupancy (%)'],
+  costsTitle:['成本和比较','Costs & comparisons'],costsHint:['所有数据可编辑。我们不会默认为你填入某国的税率。','Every number can be edited. We never invent local tax rules.'],service:['年度物业费','Annual service charge / HOA'],maintenance:['年度维修预留','Annual maintenance reserve'],utilities:['短租年水电网络','Short-let utilities / internet'],otherShort:['短租其他年度固定费用','Short-let other annual fixed costs'],shortMgmt:['短租平台及管理（%）','Short-let platform & management (%)'],longMgmt:['长租管理（%）','Long-let management (%)'],advanced:['高级参数 · 交易、税费、替代投资','Advanced · transactions, taxes, benchmark'],buyFees:['买入交易费（%）','Buying transaction fees (%)'],saleFees:['卖出交易费（%）','Selling fees (%)'],furnishing:['家具和一次性投入','Furnishings and setup'],target:['目标回报/折现率（%）','Target return / discount rate (%)'],benchmark:['替代资产收益率（%）','Alternative investment yield (%)'],longExtra:['长租其他年费','Other long-let annual costs'],tourismPct:['短租按收入征费（%）','Short-let revenue levy (%)'],tourismNight:['每已出租晚额外收费','Per-booked-night levy'],cleaning:['每已出租晚变动成本','Variable cost per booked night'],
+  evidence:['数据依据','Evidence & sources'],evidenceHint:['给报告加上来源和日期。无法核验的数字应该明确标为估计。','Cite and date your inputs. Unverifiable numbers remain estimates.'],sourceName:['主要数据来源描述','Source description'],sourceUrl:['来源网址（可选）','Source URL (optional)'],notes:['重要说明与不确定性','Assumptions & caveats'],
+  provisional:['情景预测','SCENARIO'],yourForecast:['你的投资预测','Your modeled return'],irrCaption:['综合年化 IRR · 按较高净收入的出租模式测算','Annualized IRR · higher-net-income rental strategy'],netYield:['第一年净租金收益率','Year-one net yield'],annualNet:['年度净租金','Year-one net rent'],netRentMode:['租赁方式','Rental strategy'],benchmarkGap:['相对替代投资收益差','Return vs benchmark'],makeReport:['生成 8 页 HTML 报告 ↗','Generate 8-page HTML report ↗'],jsonExport:['导出 JSON 交给智能体','Export JSON for your AI agent'],import:['导入 JSON / Agent 预填','Import JSON / Agent prefill'],privacyHint:['完全在浏览器本地计算，不发送输入数据到服务器。示例是模型假设，不代表真实交易。','Runs locally in your browser: no inputs are sent to a server. Example figures are assumptions, not verified property records.'],footer:['清楚解释回报。拒绝黑箱预测。','Explainable returns. No black-box projections.']
+};
+let state,lang='zh';
+const defaultData={project:'Sample property',city:'Dubai',country:'UAE',currency:'AED',language:'zh',purchasePrice:2000000,holdYears:10,appreciationPct:2,rentGrowthPct:1,longRent:125000,longVacancyPct:5,longManagementPct:5,longExtraCosts:2000,serviceCharge:15000,maintenance:5000,utilities:10000,shortFixedCosts:0,shortManagementPct:20,purchaseCostsPct:6,saleCostsPct:2,furnishing:30000,discountRatePct:6,benchmarkYieldPct:5,tourismPct:0,tourismPerNight:0,cleaningPerNight:25,monthly:Array.from({length:12},(_,i)=>({adr:[0,1,2,10,11].includes(i)?700:500,occupancy:[0,1,2,10,11].includes(i)?65:50})),sources:[],notes:'Illustrative assumptions. Replace with verified project data.'};
+const tr=(zhText,enText)=>lang==='zh'?zhText:enText;
+function textLanguage(){document.documentElement.lang=lang==='zh'?'zh-CN':'en';$('langButton').textContent=lang==='zh'?'EN':'中文';for(const el of document.querySelectorAll('[data-i18n]')){const val=dict[el.dataset.i18n]?.[lang==='zh'?0:1];if(val)el.innerHTML=val;}for(const el of document.querySelectorAll('[data-month]'))el.textContent=(lang==='zh'?monthsZh:monthsEn)[+el.dataset.month];}
+function renderMonths(){ $('months').innerHTML=state.monthly.map((m,i)=>`<div class="month-row"><span data-month="${i}">${(lang==='zh'?monthsZh:monthsEn)[i]}</span><input type="number" inputmode="decimal" min="0" step="1" data-index="${i}" data-key="adr" aria-label="${monthsEn[i]} ADR"><input type="number" inputmode="decimal" min="0" max="100" step="1" data-index="${i}" data-key="occupancy" aria-label="${monthsEn[i]} occupancy percentage"></div>`).join('');for(const el of document.querySelectorAll('#months input')) el.value=state.monthly[+el.dataset.index][el.dataset.key];}
+function setFromData(data){state={...structuredClone(defaultData),...data};if(!Array.isArray(state.monthly)||state.monthly.length!==12)state.monthly=structuredClone(defaultData.monthly);lang=state.language==='en'?'en':'zh';for(const id of fields) if($(id))$(id).value=state[id]??'';const s=state.sources?.[0];$('sourceLabel').value=s?.label??'';$('sourceUrl').value=s?.url??'';renderMonths();textLanguage();recompute();}
+function readValues(){for(const id of fields){if(!$(id))continue;let val=$(id).value;state[id]=numeric.has(id)?(val===''?NaN:Number(val)):val;}const prev=Array.isArray(state.sources)?state.sources:[];const old=prev[0];const label=$('sourceLabel').value,url=$('sourceUrl').value;const same=old&&old.label===label&&old.url===url;const first=label||url?(same?old:{label:label||'Source provided by user',url,quality:'user-provided',date:new Date().toISOString().slice(0,10)}):null;state.sources=[...(first?[first]:[]),...prev.slice(1)];state.language=lang;}
+function fmt(n){return Number.isFinite(n)?n.toLocaleString(lang==='zh'?'zh-CN':'en-US',{maximumFractionDigits:0}):'—';}
+function download(name,contents,mime){const blob=new Blob([contents],{type:mime});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000);}
+function recompute(){try{readValues();const errors=validate(state);if(errors.length)throw Error(errors[0]);const results=compare(state),a=results.base.short,b=results.base.long,prefer=a.first.net>b.first.net?a:b;const currency=state.currency||'AED';$('irrResult').textContent=(prefer.irrPct??0).toFixed(2)+'%';$('yieldResult').textContent=prefer.netYieldPct.toFixed(2)+'%';$('netResult').textContent=`${currency} ${fmt(prefer.first.net)}`;$('modeResult').textContent=prefer.mode==='short'?tr('短租','Short-let'):tr('长租','Long-let');$('gapResult').textContent=(prefer.benchmarkGapPct>=0?'+':'')+prefer.benchmarkGapPct.toFixed(2)+' pp';$('scenarioNote').textContent=tr(`保守 ${results.cautious[prefer.mode].irrPct.toFixed(1)}%  ·  基础 ${prefer.irrPct.toFixed(1)}%  ·  乐观 ${results.optimistic[prefer.mode].irrPct.toFixed(1)}%。以上均为预测，不是实际投资回报。`,`Cautious ${results.cautious[prefer.mode].irrPct.toFixed(1)}% · Base ${prefer.irrPct.toFixed(1)}% · Optimistic ${results.optimistic[prefer.mode].irrPct.toFixed(1)}%. Forecast scenarios, not realized returns.`);$('error').hidden=true;$('downloadReport').disabled=false;
+ }catch(e){$('error').textContent=e.message;$('error').hidden=false;$('downloadReport').disabled=true;$('irrResult').textContent='—';}}
+let timer;function update(){clearTimeout(timer);timer=setTimeout(recompute,80);}
+for(const el of document.querySelectorAll('input:not([type=file]),textarea,select:not(#preset)')) el.addEventListener('input',update);
+$('months').addEventListener('input',e=>{const el=e.target;if(!el.matches('input[data-index]'))return;state.monthly[+el.dataset.index][el.dataset.key]=Number(el.value);update();});
+$('preset').addEventListener('change',async e=>{if(e.target.value==='custom'){setFromData(defaultData);return}try{const data=embeddedPresets[e.target.value];if(!data)throw Error('Unknown preset');setFromData(structuredClone(data));}catch(error){alert(error.message)}});
+$('langButton').addEventListener('click',()=>{lang=lang==='zh'?'en':'zh';state.language=lang;textLanguage();recompute();});
+$('downloadJson').addEventListener('click',()=>{readValues();if(validate(state).length)return alert(validate(state).join('\n'));download('reim-input.json',JSON.stringify(state,null,2),'application/json');});
+$('downloadReport').addEventListener('click',()=>{readValues();if(validate(state).length)return;download('reim-investment-report.html',buildReport(state,lang),'text/html;charset=utf-8');});
+$('uploadButton').addEventListener('click',()=>$('jsonFile').click());
+$('jsonFile').addEventListener('change',async e=>{const f=e.target.files?.[0];if(!f)return;try{const obj=JSON.parse(await f.text());const errors=validate(obj);if(errors.length)throw Error(errors.join('\n'));setFromData(obj);$('preset').value='custom';}catch(ex){alert(ex.message)}e.target.value='';});
+setFromData(defaultData);
+</script>
+</body></html>

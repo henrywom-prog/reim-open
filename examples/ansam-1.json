@@ -1,0 +1,11 @@
+{
+  "project":"Ansam 1 · Yas Island", "city":"Abu Dhabi", "country":"UAE", "currency":"AED", "language":"zh",
+  "purchasePrice":1950000,"purchaseCostsPct":4.5,"saleCostsPct":2,"furnishing":25000,"holdYears":10,
+  "appreciationPct":2,"rentGrowthPct":1,"discountRatePct":6,"benchmarkYieldPct":5,
+  "longRent":107500,"longVacancyPct":5,"longManagementPct":5,"longExtraCosts":1500,
+  "serviceCharge":14000,"maintenance":4000,"utilities":9000,"shortFixedCosts":0,
+  "shortManagementPct":20,"tourismPct":6,"tourismPerNight":0,"cleaningPerNight":25,
+  "monthly":[{"adr":620,"occupancy":70},{"adr":620,"occupancy":70},{"adr":620,"occupancy":70},{"adr":520,"occupancy":60},{"adr":360,"occupancy":50},{"adr":360,"occupancy":50},{"adr":360,"occupancy":50},{"adr":360,"occupancy":50},{"adr":360,"occupancy":50},{"adr":520,"occupancy":60},{"adr":620,"occupancy":70},{"adr":620,"occupancy":70}],
+  "sources":[{"label":"Illustrative purchase and rent benchmarks — replace with verified listings/registry data","url":"","quality":"estimate","date":"2026-10-14"}],
+  "notes":"Illustrative model, not property appraisal. Seasonal occupancy and ADR are assumptions."
+}

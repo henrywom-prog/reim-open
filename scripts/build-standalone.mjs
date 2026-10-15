@@ -1,0 +1,22 @@
+/* Build one HTML file with no external assets, imports or network dependencies. */
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {resolve,dirname} from 'node:path';
+const base=new URL('../',import.meta.url);
+const path=p=>new URL(p,base);
+const contents=p=>readFile(path(p),'utf8');
+let html=await contents('docs/index.html');
+const css=await contents('docs/style.css');
+let engine=(await contents('docs/engine.mjs')).replace(/\bexport\s+(?=(?:const|function)\b)/g,'');
+let report=(await contents('docs/report.mjs')).replace(/^import .*?;\s*$/gm,'').replace(/\bexport\s+(?=(?:const|function)\b)/g,'');
+let app=(await contents('docs/app.mjs')).replace(/^import .*?;\s*$/gm,'');
+const names=['ansam-1','ajwan-c','damac-heights','sobha-waves'];
+const presets=Object.fromEntries(await Promise.all(names.map(async name=>[name,JSON.parse(await contents(`docs/presets/${name}.json`))])));
+const old="const res=await fetch(`./presets/${e.target.value}.json`,{cache:'no-store'});if(!res.ok)throw Error('Could not load preset');setFromData(await res.json());";
+const replacement="const data=embeddedPresets[e.target.value];if(!data)throw Error('Unknown preset');setFromData(structuredClone(data));";
+if(!app.includes(old))throw Error('Preset loading signature changed: update offline build');
+app=app.replace(old,replacement);
+const js=`const embeddedPresets=${JSON.stringify(presets)};\n${engine}\n${report}\n${app}`.replaceAll('</script>','<\\/script>');
+html=html.replace('<link rel="stylesheet" href="./style.css">',`<style>${css}</style>`).replace('<script type="module" src="./app.mjs"></script>',`<script>${js}</script>`);
+if(html.includes('type="module"')||html.includes('stylesheet"'))throw Error('External imports remain');
+const out=resolve(path('standalone/reim-calculator.html').pathname);await mkdir(dirname(out),{recursive:true});await writeFile(out,html,'utf8');
+console.log(`Built standalone calculator: ${out} (${Math.round(html.length/1024)} KB)`);

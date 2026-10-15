@@ -1,0 +1,20 @@
+{
+  "project":"Yas Living II · 2BR + Maid","city":"Abu Dhabi","currency":"AED","language":"zh","asOf":"2026-10-15",
+  "purchaseYear":2026,"rentalStartYear":2029,"exitYear":2036,
+  "purchasePrice":3432200,"purchaseCostsPct":4.5,"saleCostsPct":2,
+  "furnishOnHandover":15000,
+  "paymentShares":[{"year":2026,"share":1}],
+  "longRent":200000,"vacancyPct":5,"managementPct":5,
+  "serviceCharge":30000,"maintenance":6000,"otherAnnualCosts":1500,
+  "rentGrowthPct":1,"costGrowthPct":2,"appreciationPct":2,
+  "benchmarks":[{"name":"FAB AED 12个月存款（1–5m）","rate":3.93},{"name":"ADCB AED 12个月存款","rate":4},{"name":"美国10年期国债参考","rate":5.21},{"name":"目标IRR","rate":7}],
+  "sources":[
+   {"name":"Yas Living开发商介绍及项目开盘","url":"https://www.aldar.com/en/news-and-media/aldar-introduces-its-urban-living-collection-to-yas-island","quality":"developer"},
+   {"name":"Yas Living II 2BR+Maid 343.22万挂牌","url":"https://www.propertyfinder.ae/en/plp/buy/apartment-for-sale-abu-dhabi-yas-island-yas-living-146423916.html","quality":"listing"},
+   {"name":"Yas Golf Collection 2BR+Maid 21万年租挂牌","url":"https://www.propertyfinder.ae/en/plp/rent/apartment-for-rent-abu-dhabi-yas-island-yas-golf-collection-residences-d-146456897.html","quality":"comparable listing"},
+   {"name":"FAB 12月AED存款","url":"https://www.bankfab.com/en-ae/fd-rate","quality":"bank quote"},
+   {"name":"ADCB 12月AED存款","url":"https://www.adcb.com/en/personal/accounts/fixed-deposits/fixed-deposit-account.aspx","quality":"bank quote"},
+   {"name":"美国财政部10年国债（2026-10-13）","url":"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202610&type=daily_treasury_yield_curve","quality":"government quote"}
+  ],
+  "notes":"基准价来自期房转售挂牌而非成交。租金、物业费、交付日、出租起始、升值、付款时间均为估算。这个示例采用2026年全额支付房价的保守模型；若二手期房实际按约定分期承接须重新填写paymentShares。无2026–2028年的租金收入。"
+}

@@ -1,0 +1,11 @@
+{
+  "project":"DAMAC Heights · 2BR", "city":"Dubai", "country":"UAE", "currency":"AED", "language":"zh",
+  "purchasePrice":2900000,"purchaseCostsPct":6.1,"saleCostsPct":2.1,"furnishing":60000,"holdYears":10,
+  "appreciationPct":2,"rentGrowthPct":1,"discountRatePct":6,"benchmarkYieldPct":5,
+  "longRent":175000,"longVacancyPct":5,"longManagementPct":5,"longExtraCosts":2000,
+  "serviceCharge":25000,"maintenance":8500,"utilities":18000,"shortFixedCosts":0,
+  "shortManagementPct":20,"tourismPct":0,"tourismPerNight":30,"cleaningPerNight":35,
+  "monthly":[{"adr":1000,"occupancy":80},{"adr":1000,"occupancy":80},{"adr":1000,"occupancy":80},{"adr":823,"occupancy":70},{"adr":625,"occupancy":60},{"adr":625,"occupancy":60},{"adr":625,"occupancy":60},{"adr":625,"occupancy":60},{"adr":625,"occupancy":60},{"adr":823,"occupancy":70},{"adr":1000,"occupancy":80},{"adr":1000,"occupancy":80}],
+  "sources":[{"label":"Traveler-observed nightly price Oct 2025 (CNY 1,500); other inputs illustrative","url":"","quality":"mixed","date":"2025-10"}],
+  "notes":"2025 Oct ADR observed once; do not extrapolate to the full year."
+}

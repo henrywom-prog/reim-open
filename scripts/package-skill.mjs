@@ -1,0 +1,14 @@
+import {readFile,writeFile,copyFile,mkdir,readdir} from 'node:fs/promises';
+import {resolve} from 'node:path';
+const root=new URL('../',import.meta.url);
+const u=p=>new URL(p,root);
+await mkdir(u('skills/reim/scripts'),{recursive:true});
+await mkdir(u('skills/reim/assets/examples'),{recursive:true});
+await copyFile(u('docs/engine.mjs'),u('skills/reim/scripts/engine.mjs'));
+await copyFile(u('docs/report.mjs'),u('skills/reim/scripts/report.mjs'));
+await copyFile(u('standalone/reim-calculator.html'),u('skills/reim/assets/reim-calculator.html'));
+for(const n of await readdir(u('examples/'))) if(n.endsWith('.json'))await copyFile(u(`examples/${n}`),u(`skills/reim/assets/examples/${n}`));
+let cli=await readFile(u('bin/reim.mjs'),'utf8');
+cli=cli.replaceAll("../docs/engine.mjs","./engine.mjs").replaceAll("../docs/report.mjs","./report.mjs");
+await writeFile(u('skills/reim/scripts/reim.mjs'),cli,'utf8');
+console.log('Packaged self-contained Agent Skill in skills/reim/');

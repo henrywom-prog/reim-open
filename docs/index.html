@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="REIM — Agent-native real estate return calculator. Understand net yield, IRR and risk with transparent assumptions.">
+  <title>REIM — Property returns, explained.</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar"><div class="logo">REIM<span class="logo-slash">/</span><span class="logo-small">REAL ESTATE INTELLIGENCE</span></div><div class="topactions"><div class="local-pill" data-i18n="private">◌ Local calculations · No account</div><button class="language" type="button" id="langButton" aria-label="Switch language">EN</button><a class="github" href="https://agentskills.io/specification" target="_blank" rel="noopener noreferrer">AGENT SKILLS ↗</a></div></header>
+  <div class="layout">
+    <main class="form-col">
+      <section class="intro"><div class="overline">INDEPENDENT FINANCIAL THINKING <span> / v0.1</span></div><h1 data-i18n="headline">房子究竟<br><em>能赚多少钱？</em></h1><p data-i18n="intro">不只看租售比。把房价、季节性入住率、隐藏成本和卖出价格放进同一个透明模型。</p><div class="chips"><span>NET YIELD</span><span>IRR</span><span>STRESS TEST</span><span>8-PAGE REPORT</span></div></section>
+      <section class="editor">
+        <div class="section-heading"><span class="step">01</span><div><h2 data-i18n="propertyTitle">物业概况</h2><p data-i18n="propertyHint">先输入你实际知道的信息；不确定的参数可以使用假设。</p></div></div>
+        <div class="field full"><label data-i18n="example">示例项目</label><select id="preset"><option value="custom">Custom / 自定义</option><option value="ansam-1">Ansam 1 · Abu Dhabi</option><option value="ajwan-c">Ajwan C · Abu Dhabi</option><option value="damac-heights">DAMAC Heights · Dubai</option><option value="sobha-waves">Sobha Waves · Dubai</option></select></div>
+        <div class="field-grid">
+          <div class="field"><label for="project" data-i18n="project">项目名称</label><input id="project" type="text" maxlength="160" placeholder="Building / project"></div>
+          <div class="field"><label for="currency" data-i18n="currency">币种</label><input id="currency" type="text" maxlength="8" value="AED" placeholder="AED / USD / CNY"></div>
+          <div class="field"><label for="city" data-i18n="city">城市</label><input id="city" type="text" maxlength="80"></div>
+          <div class="field"><label for="country" data-i18n="country">国家</label><input id="country" type="text" maxlength="80"></div>
+          <div class="field"><label for="purchasePrice" data-i18n="purchasePrice">购房总价</label><input id="purchasePrice" inputmode="decimal" type="number" min="1" step="1000"></div>
+          <div class="field"><label for="holdYears" data-i18n="holdYears">计划持有年数</label><input id="holdYears" type="number" min="1" max="40" step="1"></div>
+          <div class="field"><label for="appreciationPct" data-i18n="growth">预计房价年变化（%）</label><input id="appreciationPct" type="number" step="0.5"></div>
+          <div class="field"><label for="rentGrowthPct" data-i18n="rentGrowth">租金每年增长（%）</label><input id="rentGrowthPct" type="number" step="0.5"></div>
+        </div>
+      </section>
+      <section class="editor">
+        <div class="section-heading"><span class="step">02</span><div><h2 data-i18n="rentalTitle">出租收入</h2><p data-i18n="rentalHint">把长租和短租放在一起，找出更合理的经营方式。</p></div></div>
+        <div class="mode-title"><span data-i18n="longlet">长期租赁</span><span>ANNUAL RENT</span></div>
+        <div class="field-grid"><div class="field"><label for="longRent" data-i18n="annualRent">长租年租金</label><input id="longRent" type="number" min="0"></div><div class="field"><label for="longVacancyPct" data-i18n="longVacancy">空置准备率（%）</label><input id="longVacancyPct" type="number" min="0" max="100" step="0.5"></div></div>
+        <div class="mode-title"><span data-i18n="shortlet">短期租赁</span><span>MONTHLY ADR / OCCUPANCY</span></div>
+        <p class="tip" data-i18n="monthHint">每个月的平均成交房价和全年日历入住率。请勿把某一次旅游住宿价格当作全年均价。</p>
+        <div class="month-head"><span data-i18n="month">月份</span><span data-i18n="adr">每晚平均房价</span><span data-i18n="occupancy">入住率（%）</span></div><div id="months" class="month-grid"></div>
+      </section>
+      <section class="editor">
+        <div class="section-heading"><span class="step">03</span><div><h2 data-i18n="costsTitle">成本和比较</h2><p data-i18n="costsHint">所有数据可编辑。我们不会默认为你填入某国的税率。</p></div></div>
+        <div class="field-grid">
+          <div class="field"><label for="serviceCharge" data-i18n="service">年度物业费</label><input id="serviceCharge" type="number" min="0"></div>
+          <div class="field"><label for="maintenance" data-i18n="maintenance">年度维修预留</label><input id="maintenance" type="number" min="0"></div>
+          <div class="field"><label for="utilities" data-i18n="utilities">短租年水电网络</label><input id="utilities" type="number" min="0"></div>
+          <div class="field"><label for="shortFixedCosts" data-i18n="otherShort">短租其他年度固定费用</label><input id="shortFixedCosts" type="number" min="0"></div>
+          <div class="field"><label for="shortManagementPct" data-i18n="shortMgmt">短租平台及管理（%）</label><input id="shortManagementPct" type="number" min="0" max="100" step="0.5"></div>
+          <div class="field"><label for="longManagementPct" data-i18n="longMgmt">长租管理（%）</label><input id="longManagementPct" type="number" min="0" max="100" step="0.5"></div>
+        </div>
+        <details><summary data-i18n="advanced">高级参数 · 交易、税费、替代投资</summary>
+          <div class="field-grid more-fields">
+            <div class="field"><label for="purchaseCostsPct" data-i18n="buyFees">买入交易费（%）</label><input id="purchaseCostsPct" type="number" min="0" max="100" step="0.1"></div>
+            <div class="field"><label for="saleCostsPct" data-i18n="saleFees">卖出交易费（%）</label><input id="saleCostsPct" type="number" min="0" max="100" step="0.1"></div>
+            <div class="field"><label for="furnishing" data-i18n="furnishing">家具和一次性投入</label><input id="furnishing" type="number" min="0"></div>
+            <div class="field"><label for="discountRatePct" data-i18n="target">目标回报/折现率（%）</label><input id="discountRatePct" type="number" step="0.25"></div>
+            <div class="field"><label for="benchmarkYieldPct" data-i18n="benchmark">替代资产收益率（%）</label><input id="benchmarkYieldPct" type="number" step="0.25"></div>
+            <div class="field"><label for="longExtraCosts" data-i18n="longExtra">长租其他年费</label><input id="longExtraCosts" type="number" min="0"></div>
+            <div class="field"><label for="tourismPct" data-i18n="tourismPct">短租按收入征费（%）</label><input id="tourismPct" type="number" min="0" max="100" step="0.5"></div>
+            <div class="field"><label for="tourismPerNight" data-i18n="tourismNight">每已出租晚额外收费</label><input id="tourismPerNight" type="number" min="0"></div>
+            <div class="field"><label for="cleaningPerNight" data-i18n="cleaning">每已出租晚变动成本</label><input id="cleaningPerNight" type="number" min="0"></div>
+          </div>
+        </details>
+      </section>
+      <section class="editor">
+        <div class="section-heading"><span class="step">04</span><div><h2 data-i18n="evidence">数据依据</h2><p data-i18n="evidenceHint">给报告加上来源和日期。无法核验的数字应该明确标为估计。</p></div></div>
+        <div class="field-grid"><div class="field"><label for="sourceLabel" data-i18n="sourceName">主要数据来源描述</label><input id="sourceLabel" type="text" maxlength="300" placeholder="Registry / listing / user observation"></div><div class="field"><label for="sourceUrl" data-i18n="sourceUrl">来源网址（可选）</label><input id="sourceUrl" type="url" placeholder="https://..."></div></div>
+        <div class="field"><label for="notes" data-i18n="notes">重要说明与不确定性</label><textarea id="notes" rows="3" maxlength="1500"></textarea></div>
+      </section>
+    </main>
+    <aside class="result-panel"><div class="aside-sticky"><div class="result-top"><small>REIM <span>LIVE ANALYSIS</span></small><span class="report-state" id="reportState" data-i18n="provisional">SCENARIO</span></div><div class="aside-heading" data-i18n="yourForecast">你的投资预测</div><div class="price-result" id="irrResult">—</div><p class="result-caption" data-i18n="irrCaption">综合年化 IRR · 按较高净收入的出租模式测算</p><div class="divider"></div><div class="mini-stats"><div><label data-i18n="netYield">第一年净租金收益率</label><strong id="yieldResult">—</strong></div><div><label data-i18n="annualNet">年度净租金</label><strong id="netResult">—</strong></div><div><label data-i18n="netRentMode">租赁方式</label><strong id="modeResult">—</strong></div><div><label data-i18n="benchmarkGap">相对替代投资收益差</label><strong id="gapResult">—</strong></div></div><div class="scenario-note" id="scenarioNote">—</div><div id="error" role="alert" class="error" hidden></div><button class="primary" id="downloadReport" type="button" data-i18n="makeReport">生成 8 页 HTML 报告 ↗</button><button class="secondary" id="downloadJson" type="button" data-i18n="jsonExport">导出 JSON 交给智能体</button><button class="ghost" id="uploadButton" type="button" data-i18n="import">导入 JSON / Agent 预填</button><input type="file" id="jsonFile" accept="application/json,.json" hidden><p class="privacy" data-i18n="privacyHint">完全在浏览器本地计算，不发送输入数据到服务器。示例是模型假设，不代表真实交易。</p></div></aside>
+  </div><footer><span>REIM / OPEN METHODOLOGY</span><span data-i18n="footer">Explainable returns. No black-box projections.</span><span>MIT LICENSE · v0.1</span></footer>
+</div>
+<script type="module" src="./app.mjs"></script>
+</body></html>

@@ -1,0 +1,11 @@
+{
+  "project":"Sobha Hartland Waves · 2BR", "city":"Dubai", "country":"UAE", "currency":"AED", "language":"zh",
+  "purchasePrice":2150000,"purchaseCostsPct":6.1,"saleCostsPct":2.1,"furnishing":45000,"holdYears":10,
+  "appreciationPct":2,"rentGrowthPct":1,"discountRatePct":6,"benchmarkYieldPct":5,
+  "longRent":125000,"longVacancyPct":5,"longManagementPct":5,"longExtraCosts":1500,
+  "serviceCharge":18000,"maintenance":6500,"utilities":15000,"shortFixedCosts":0,
+  "shortManagementPct":20,"tourismPct":0,"tourismPerNight":20,"cleaningPerNight":30,
+  "monthly":[{"adr":820,"occupancy":75},{"adr":820,"occupancy":75},{"adr":820,"occupancy":75},{"adr":640,"occupancy":60},{"adr":470,"occupancy":50},{"adr":470,"occupancy":50},{"adr":470,"occupancy":50},{"adr":470,"occupancy":50},{"adr":470,"occupancy":50},{"adr":640,"occupancy":60},{"adr":820,"occupancy":75},{"adr":820,"occupancy":75}],
+  "sources":[{"label":"Traveler-observed nightly price Oct 2025 (CNY 1,166); other inputs illustrative","url":"","quality":"mixed","date":"2025-10"}],
+  "notes":"Unavailability of a prior rental listing does not prove a sale."
+}

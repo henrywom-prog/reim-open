@@ -1,0 +1,11 @@
+{
+  "project":"Ajwan Towers C · Museum view", "city":"Abu Dhabi", "country":"UAE", "currency":"AED", "language":"zh",
+  "purchasePrice":2850000,"purchaseCostsPct":4.5,"saleCostsPct":2,"furnishing":40000,"holdYears":10,
+  "appreciationPct":2,"rentGrowthPct":1,"discountRatePct":6,"benchmarkYieldPct":5,
+  "longRent":170000,"longVacancyPct":5,"longManagementPct":5,"longExtraCosts":2000,
+  "serviceCharge":25000,"maintenance":6000,"utilities":15000,"shortFixedCosts":0,
+  "shortManagementPct":20,"tourismPct":6,"tourismPerNight":0,"cleaningPerNight":35,
+  "monthly":[{"adr":1200,"occupancy":70},{"adr":1200,"occupancy":70},{"adr":1200,"occupancy":70},{"adr":950,"occupancy":55},{"adr":620,"occupancy":35},{"adr":620,"occupancy":35},{"adr":620,"occupancy":35},{"adr":620,"occupancy":35},{"adr":620,"occupancy":35},{"adr":950,"occupancy":55},{"adr":1200,"occupancy":70},{"adr":1200,"occupancy":70}],
+  "sources":[{"label":"Illustrative model based on public asking price and traveler observations","url":"","quality":"estimate","date":"2026-10-14"}],
+  "notes":"Illustrative model only. Beach access does not ensure occupancy or pricing premium."
+}
